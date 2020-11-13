@@ -1,0 +1,434 @@
+<!--Edited file by Hussein/Nayan--->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Peer2Peer-Grading: Classes</title>
+  <!--      <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css'%}" />-->
+  <link rel="stylesheet" href="{% static 'assets1/bootstrap/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets1/Ionicons/css/ionicons.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets1/css/custom.css' %}">
+  <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/img/som_icon.png' %}" />
+  <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.min.css'%}" />
+  <link rel="stylesheet" href="{% static 'assets/css/slicknav.css'%}" />
+  <link rel="stylesheet" href="{% static 'assets/css/flaticon.css'%}" />
+  <link rel="stylesheet" href="{% static 'assets/css/gijgo.css'%}" />
+  <link rel="stylesheet" href="{% static 'assets/css/animate.min.css'%}" />
+  <link rel="stylesheet" href="{% static 'assets/css/magnific-popup.css'%}" />
+  <link rel="stylesheet" href="{% static 'assets/css/fontawesome-all.min.css'%}" />
+  <link rel="stylesheet" href="{% static 'assets/css/themify-icons.css'%}" />
+  <link rel="stylesheet" href="{% static 'assets/css/slick.css'%}" />
+  <link rel="stylesheet" href="{% static 'assets/css/nice-select.css'%}" />
+  <link rel="stylesheet" href="{% static 'assets/css/style.css'%}" />
+  <style>
+    .hovering:hover {
+      background-color: blue;
+      color: white;
+    }
+    .login-box {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 400px;
+      padding: 40px;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 0, 0, 1);
+      box-sizing: border-box;
+      box-shadow: 0 15px 25px rgba(0, 0, 0, 1);
+      border-radius: 10px;
+    }
+
+    .login-box h2 {
+      margin: 0 0 30px;
+      padding: 0;
+      color: #fff;
+      text-align: center;
+    }
+
+    .login-box .user-box {
+      position: relative;
+    }
+
+    .login-box .user-box input {
+      width: 100%;
+      padding: 10px 0;
+      font-size: 16px;
+      color: #fff;
+      margin-bottom: 30px;
+      border: none;
+      border-bottom: 1px solid #fff;
+      outline: none;
+      background: transparent;
+    }
+
+    .login-box .user-box label {
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: 10px 0;
+      font-size: 16px;
+      color: #fff;
+      pointer-events: none;
+      transition: .5s;
+    }
+
+    .login-box .user-box input:focus~label,
+    .login-box .user-box input:valid~label {
+      top: -20px;
+      left: 0;
+      color: #03e9f4;
+      font-size: 12px;
+    }
+
+    .login-box form a {
+      position: relative;
+      display: inline-block;
+      padding: 10px 20px;
+      color: #03e9f4;
+      font-size: 16px;
+      text-decoration: none;
+      text-transform: uppercase;
+      overflow: hidden;
+      transition: .5s;
+      margin-top: 40px;
+      letter-spacing: 4px
+    }
+
+
+
+    .login-box a span {
+      position: absolute;
+      display: block;
+    }
+
+    .sample--button{
+        padding: 10rem;
+        box-sizing: border-box;
+        top:50px;
+        left: 50px;
+
+      }
+      a {
+        color: #007bff;
+        position:relative;
+      }
+    a:hover {
+      color: #7300ff;
+      }
+  </style>
+</head>
+
+<body style="overflow: visible;">
+  <header>
+    <!-- Header Start -->
+    <div class="header-area">
+      <div class="main-header">
+        <div class="header-top d-none d-lg-block">
+          <div class="container">
+            <div class="col-xl-12">
+              <div class="row d-flex justify-content-between align-items-center">
+                <div class="header-info-left">
+                  <ul>
+                   {% if user.is_authenticated %}
+                       <li>{{user.username}}</li>
+                      <li>{{user.email}}</li>
+                      {% else %}
+                      <li>Login to explore</li>
+                      {% endif %}
+                  </ul>
+                </div>
+                <div class="header-info-right">
+                  <ul>
+                    {% if user.is_authenticated %}
+                    <a style="color:blue;" href="{% url 'logout' %}"><i class="ti-user"></i>Logout</a>
+                    {% else %}
+                    <li>
+                      <a href="{% url 'login' %}"><i class="ti-user"></i>Login</a>
+                    </li>
+                    <li>
+                      <a href="{% url 'signup' %}"><i class="ti-lock"></i>Register</a>
+                    </li>
+                    {% endif %}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="header-bottom header-sticky">
+          <div class="container">
+            <div class="menu-wrapper">
+              <!-- Logo -->
+              <div class="logo logo2">
+                <a href="{% url 'index' %}"><img src="{% static 'assets/img/logo/somaiya.png' %}"
+                    alt="Somaiya Vidyavihar University" width="180" heigth="60" /></a>
+              </div>
+              <div class="main-menu d-none d-lg-block">
+                <nav>
+                  <ul id="navigation">
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li><a href="{% url 'about' %}">About</a></li>
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url 'homepage' %}">Created Classes</a></li>
+                    <li><a href="{% url 'joinclass' %}">Joined Classes</a></li>
+                    {% endif %}
+                    <li><a href="{% url 'contact' %}">Contact</a></li>
+                  </ul>
+                </nav>
+              </div>
+             </div>
+            <!-- Mobile Menu -->
+            <div class="col-12">
+              <div class="mobile_menu d-block d-lg-none"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Header End -->
+  </header>
+
+  <main style="background: white;" class="py-5">
+    <section id="team-page">
+      <div class="container">
+        <div class="head-title d-flex align-items-center justify-content-between my-3">
+          <h4 style="font-size: 50px" class="text-black">Classes</h4>
+          <div class="btn-wrapper">
+            <button style="border-radius: 12.5px; font-size: 1.5vw" onclick="showform()" class="btn btn-warning text-white font-weight-bold"><i class="ion-android-add"
+                style="font-size: 18px;"></i>
+              Create Class</button>
+          </div>
+        </div>
+        <div style="border-bottom: 1px solid"></div>
+        <div class="categories-area" style="padding-top: 25px;">
+          <div class="container">
+            <div class="row row-content">
+              <div class="col-md-12 col-sm-12" style="padding: 0px 0px;">
+              {% for c in classes %}
+                <div class="single-cat float-left" style="width: 30%; margin: 0px 0px 20px 30px; padding: 10px; display: inline-block;">
+                  <div style="text-align: center;" class="cat-icon mb-3"><a href="{% url 'cur_class' c.pk %}">
+                    <span class="flaticon-web-design"></span></a>
+                  </div>
+                  <div style="text-align: center;" class="cat-cap">
+                    <h5 style="text-transform: uppercase; text-decoration: underline;"><a href="{% url 'cur_class' c.pk %}">{{c.class_name}}</a></h5>
+                    <p style="text-transform:capitalize;margin-bottom: 17px;" class="color">Class Code : {{c.class_code}}</p>
+                    <a href="{% url 'cur_class' c.pk %}" class="read-more1"><span>Teacher : {{c.teacher.username}} <i class="fa fa-graduation-cap"></i></span></a>
+                  </div>
+                </div>           
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <div id="createclass" class="login-box" style="visibility: hidden; z-index: 100;">
+    <h2 >Create Class</h2>
+    <form method="post">
+      {% csrf_token %}
+      <input type="hidden" name="del_class" value="-1">
+      <div class="user-box">
+        <input type="text" name="classname" autocomplete="off" required>
+        <label>Class Name</label>
+      </div>
+      <div class="user-box">
+        <input type="text" name="desc" autocomplete="off" required>
+        <label>Description</label>
+      </div>
+      <div class="user-box">
+        <label style="color: aliceblue;"></label>
+        <a href="no-javascript.html" id="getNumber">GET CODE</a>
+        </label>
+        <div style=" color: aliceblue;" id="myNumber"></div>
+        <script>
+          var link = document.getElementById('getNumber'); // Gets the link
+          link.onclick = getNumber; // Runs the function on click
+
+          function getNumber() {
+            // var minNumber = 0; // The minimum number you want
+            // var maxNumber = 100; // The maximum number you want
+            // var randomnumber = Math.floor(Math.random() * (maxNumber + 1) + minNumber); // Generates random number
+            var text = "";
+
+            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+            for (var i = 0; i < 6; i++) {
+
+              text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+            }
+            $('#myNumber').html(text); // Sets content of <div> to number
+            $('#code').html(text);
+            return false; // Returns false just to tidy everything up
+          }
+        </script>
+        <input type="text" name="code" placeholder="paste code" autocomplete="off" required>
+        <br><br>
+      </div>
+      <button type="submit" class="btn btn-success">Create</button>
+      <button onclick="showform()" type="button" class="btn btn-danger">Cancel</button>
+    </form>
+  </div>
+  <script>
+    function showform() {
+      if (document.getElementById('createclass').style.visibility == 'visible') {
+        document.getElementById('createclass').style.visibility = 'hidden';
+        document.getElementById('create_class').style.visibility = 'visible';
+
+      } else {
+        document.getElementById('createclass').style.visibility = 'visible';
+        document.getElementById('create_class').style.visibility = 'hidden';
+
+      }
+    }
+  </script>
+
+<!--  -->
+  
+  <!--     <script src="{% static './assets/js/vendor/modernizr-3.5.0.min.js' %}"></script>-->
+  <script src="{% static './assets1/jquery/jquery.min.js' %}"></script>
+  <script src="{% static './assets1/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<footer style="margin-top: 50px;">
+    <!--------------------------------COPY START  ---------------------------------->
+
+    <!--? Footer Start-->
+
+   <div class="footer-area footer-bg">
+    <div class="container">
+      <div class="footer-top footer-padding">
+        <!-- footer Heading -->
+        <div class="footer-heading">
+          <div class="row justify-content-between">
+            <div class="col-xl-6 col-lg-7 col-md-10">
+              <div class="footer-tittle2">
+                <h4>Stay Updated</h4>
+              </div>
+              <!-- Form -->
+              <div class="footer-form mb-50">
+                <div id="mc_embed_signup">
+                  <form target="_blank"
+                    action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
+                    method="get" class="subscribe_form relative mail_part" novalidate="true">
+                    <input type="email" name="EMAIL" id="newsletter-form-email" placeholder=" Email Address "
+                      class="placeholder hide-on-focus" onfocus="this.placeholder = ''"
+                      onblur="this.placeholder = 'Your email address'" />
+                    <div class="form-icon">
+                      <button type="submit" name="submit" id="newsletter-submit"
+                        class="email_icon newsletter-submit button-contactForm">
+                        Subscribe Now
+                      </button>
+                    </div>
+                    <div class="mt-10 info"></div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-5 col-lg-5">
+              <div class="footer-tittle2">
+                <h4>Let’s Get Social</h4>
+              </div>
+              <!-- Footer Social -->
+              <div class="footer-social">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-google"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Footer Menu -->
+   
+              <div class="media contact-info" style="float: left;margin-right: 120px;">
+                <span class="contact-info__icon" style="float: left;"><i class="ti-home"></i></span>
+                <div class="media-body ">
+                  <h3 style="color: white;">K. J. Somaiya College of Engineering<br/><span style="margin-left: 45px;">Mumbai, 400077<span></h3>
+              
+                </div>
+              </div>
+              <div class="media contact-info" style="float: left;margin-right:190px; ">
+                <span class="contact-info__icon" style="float: left;"><i class="ti-tablet"></i
+                ></span>
+                <div class="media-body">
+                  <h3 style="color: white;">+91-1234567890<br/>Mon to Fri 9am to 6pm</h3>
+                 
+                </div>
+              </div>
+              <div class="media contact-info">
+                <span class="contact-info__icon" ><i class="ti-email"></i></span>
+                <div class="media-body">
+                  <h3 style="color: white;">peergrade123@gmail.com<br/>Send us your query anytime!</h3>
+                  
+                </div>
+              </div>
+
+
+       
+      </div>
+      <!-- Footer Bottom -->
+      <div class="footer-bottom">
+        <div class="row d-flex align-items-center">
+          <div class="col-lg-12">
+            <div class="footer-copy-right text-center">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Footer End-->
+</footer>
+<!-- Scroll Up -->
+<div id="back-top">
+    <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+</div>
+
+<!-- JS here -->
+
+<script src="{% static './assets/js/vendor/modernizr-3.5.0.min.js' %}"></script>
+<!-- Jquery, Popper, Bootstrap -->
+<script src="{% static './assets/js/vendor/jquery-1.12.4.min.js' %}"></script>
+<script src="{% static './assets/js/popper.min.js' %}"></script>
+<script src="{% static './assets/js/bootstrap.min.js' %}"></script>
+<!-- Jquery Mobile Menu -->
+<script src="{% static './assets/js/jquery.slicknav.min.js' %}"></script>
+
+<!-- Jquery Slick , Owl-Carousel Plugins -->
+<script src="{% static './assets/js/owl.carousel.min.js' %}"></script>
+<script src="{% static './assets/js/slick.min.js' %}"></script>
+<!-- One Page, Animated-HeadLin -->
+<script src="{% static './assets/js/wow.min.js' %}"></script>
+<script src="{% static './assets/js/animated.headline.js' %}"></script>
+<script src="{% static './assets/js/jquery.magnific-popup.js' %}"></script>
+
+<!-- Date Picker -->
+<script src="{% static './assets/js/gijgo.min.js' %}"></script>
+<!-- Nice-select, sticky -->
+<script src="{% static './assets/js/jquery.nice-select.min.js' %}"></script>
+<script src="{% static './assets/js/jquery.sticky.js' %}"></script>
+
+<!-- counter , waypoint -->
+<script src="{% static './assets/js/jquery.counterup.min.js' %}"></script>
+<script src="{% static './assets/js/waypoints.min.js' %}"></script>
+
+<!-- contact js -->
+<script src="{% static './assets/js/contact.js' %}"></script>
+<script src="{% static './assets/js/jquery.form.js' %}"></script>
+<script src="{% static './assets/js/jquery.validate.min.js' %}"></script>
+<script src="{% static './assets/js/mail-script.js' %}"></script>
+<script src="{% static './assets/js/jquery.ajaxchimp.min.js' %}"></script>
+
+<!-- Jquery Plugins, main Jquery -->
+<script src="{% static './assets/js/plugins.js' %}"></script>
+<script src="{% static './assets/js/main.js' %}"></script>
+
+</body>
+
+</html>

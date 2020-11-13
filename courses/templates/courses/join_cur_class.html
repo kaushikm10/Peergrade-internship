@@ -1,0 +1,305 @@
+<!--Edited by Hussein/Nayan-->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Peer2Peer-Grading: {{ cur_class.class_name }}</title>
+  <link rel="stylesheet" href="{% static 'assets1/bootstrap/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets1/Ionicons/css/ionicons.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets1/css/custom.css' %}">
+      <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/img/som_icon.png' %}"/>
+      <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.min.css'%}"/>
+    <link rel="stylesheet" href="{% static 'assets/css/slicknav.css'%}" />
+    <link rel="stylesheet" href="{% static 'assets/css/flaticon.css'%}" />
+    <link rel="stylesheet" href="{% static 'assets/css/gijgo.css'%}" />
+    <link rel="stylesheet" href="{% static 'assets/css/animate.min.css'%}" />
+    <link rel="stylesheet" href="{% static 'assets/css/magnific-popup.css'%}" />
+    <link rel="stylesheet" href="{% static 'assets/css/fontawesome-all.min.css'%}"/>
+    <link rel="stylesheet" href="{% static 'assets/css/themify-icons.css'%}" />
+    <link rel="stylesheet" href="{% static 'assets/css/slick.css'%}" />
+    <link rel="stylesheet" href="{% static 'assets/css/nice-select.css'%}" />
+    <link rel="stylesheet" href="{% static 'assets/css/style.css'%}" />
+    <style>
+      .hover:hover {
+        background-color:#2d3092 ;
+      }
+    </style>
+</head>
+<body>
+<header>
+      <!-- Header Start -->
+      <div class="header-area">
+        <div class="main-header">
+          <div class="header-top d-none d-lg-block">
+
+            <div class="container">
+              <div class="col-xl-12">
+                <div
+                  class="row d-flex justify-content-between align-items-center"
+                >
+                  <div class="header-info-left">
+                    <ul>
+                      {% if user.is_authenticated %}
+                       <li>{{user.username}}</li>
+                      <li>{{user.email}}</li>
+                      {% else %}
+                      <li>Login to explore</li>
+                      {% endif %}
+                    </ul>
+                  </div>
+                  <div class="header-info-right">
+                    <ul>
+                      {% if user.is_authenticated %}
+                      <a style="color:blue;" href="{% url 'logout' %}"><i class="ti-user"></i>Logout</a>
+                      {% else %}
+                      <li>
+                        <a href="{% url 'login' %}"><i class="ti-user"></i>Login</a>
+                      </li>
+                      <li>
+                        <a href="{% url 'signup' %}"><i class="ti-lock"></i>Register</a>
+                      </li>
+                      {% endif %}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="header-bottom header-sticky">
+
+            <div class="container">
+              <div class="menu-wrapper">
+                <!-- Logo -->
+                <div class="logo logo2">
+                  <a href="{% url 'index' %}"
+                    ><img
+                      src="{% static 'assets/img/logo/somaiya.png' %}"
+                      alt="Somaiya Vidyavihar University"
+                      width="180"
+                      heigth="60"
+                  /></a>
+                </div>
+
+                <div class="main-menu d-none d-lg-block">
+                  <nav>
+                    <ul id="navigation">
+                      <li><a href="{% url 'index' %}">Home</a></li>
+                      <li><a href="{% url 'about' %}">About</a></li>
+                      {% if user.is_authenticated %}
+                        <li><a href="{% url 'homepage' %}">Created Classes</a></li>
+                        <li><a href="{% url 'joinclass' %}">Joined Classes</a></li>
+                      {% endif %}
+                      <li><a href="{% url 'contact' %}">Contact</a></li>
+                    </ul>
+                  </nav>
+                </div>
+
+              </div>
+              <!-- Mobile Menu -->
+              <div class="col-12">
+                <div class="mobile_menu d-block d-lg-none"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Header End -->
+    </header>
+    <main style="background: white;" class="py-5">
+    <section id="team-page">
+      <div class="container">
+        <div class="head-title d-flex align-items-center justify-content-between my-3">
+          <h4 style="font-size: 50px" class="text-black">{{ cur_class.class_name }}</h4>
+          <h6 style="font-size: 20px" class="text-black">{{ cur_class.class_description }}</h6>
+          <form method="post" action="{% url 'joinclass'%}">
+            {% csrf_token %}
+            <input type="hidden" name="l_class" value="{{class_id}}">
+            <button style="border-radius: 12.5px" class="btn btn-danger" type="submit">Leave Class</button>
+          </form>
+        </div>
+        <div style="border-bottom: 1px solid"></div>
+        <div class="categories-area" style="padding-top: 25px;">
+          <div class="container">
+            <div class="row row-content">
+              <div class="col-md-12 col-sm-12" style="padding: 0px 0px;">
+              {% for a in assignments %}
+              <div class="single-cat float-left" style="width: 30%; margin: 0px 0px 20px 30px; padding: 10px; height: 350px">
+                  <div style="text-align: center;" class="cat-icon mb-3"><a href="{% url 'cur_assignment_join' a.pk %}">
+                    <span class="flaticon-web-design"></span></a>
+                  </div>
+                  <div style="text-align: center;" class="cat-cap">
+                    <h5 style="text-transform: uppercase; text-decoration: underline;"><a href="{% url 'cur_assignment_join' a.pk %}">{{a.assignment_name}}</a></h5>
+                    <p style="margin-bottom: 17px;">Max Points: {{a.points}}</p>
+                    <p style="margin-bottom: 15px;">Due: {{a.due_date}}</p>
+                    {% if a.grading_type is False %}
+                    <a style="border-bottom: 1px solid" href="{% url 'peers_assigned' a.pk %}" class="read-more1"><span>To Review Peers <i class="fa fa-graduation-cap"></i>>></span></a>
+                    {% endif %}
+                  </div>
+                </div>
+              {% endfor %}
+
+                {% for n in notice %}
+                <div class="single-cat float-left" style="width: 30%; margin: 0px 0px 20px 30px; padding: 10px; height: 350px">
+                  <div style="text-align: center;" class="cat-icon mb-3"><a href="{% url 'cur_notice' n.pk %}">
+                    <span class="flaticon-web-design"></span></a>
+                  </div>
+                  <div style="text-align: center;" class="cat-cap">
+                    <h5 style="text-transform: uppercase; text-decoration: underline;"><a href="{% url 'cur_notice' n.pk %}">{{n.notice_name}}</a></h5>
+                    <p style="margin-bottom: 15px;">Posted On: {{n.created_on}}</p>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer style="margin-top: 50px;">
+    <!--------------------------------COPY START  ---------------------------------->
+
+    <!--? Footer Start-->
+
+    <div class="footer-area footer-bg">
+    <div class="container">
+      <div class="footer-top footer-padding">
+        <!-- footer Heading -->
+        <div class="footer-heading">
+          <div class="row justify-content-between">
+            <div class="col-xl-6 col-lg-7 col-md-10">
+              <div class="footer-tittle2">
+                <h4>Stay Updated</h4>
+              </div>
+              <!-- Form -->
+              <div class="footer-form mb-50">
+                <div id="mc_embed_signup">
+                  <form target="_blank"
+                    action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
+                    method="get" class="subscribe_form relative mail_part" novalidate="true">
+                    <input type="email" name="EMAIL" id="newsletter-form-email" placeholder=" Email Address "
+                      class="placeholder hide-on-focus" onfocus="this.placeholder = ''"
+                      onblur="this.placeholder = 'Your email address'" />
+                    <div class="form-icon">
+                      <button type="submit" name="submit" id="newsletter-submit"
+                        class="email_icon newsletter-submit button-contactForm">
+                        Subscribe Now
+                      </button>
+                    </div>
+                    <div class="mt-10 info"></div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-5 col-lg-5">
+              <div class="footer-tittle2">
+                <h4>Let’s Get Social</h4>
+              </div>
+              <!-- Footer Social -->
+              <div class="footer-social">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-google"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Footer Menu -->
+   
+              <div class="media contact-info" style="float: left;margin-right: 120px;">
+                <span class="contact-info__icon" style="float: left;"><i class="ti-home"></i></span>
+                <div class="media-body ">
+                  <h3 style="color: white;">K. J. Somaiya College of Engineering<br/><span style="margin-left: 45px;">Mumbai, 400077<span></h3>
+              
+                </div>
+              </div>
+              <div class="media contact-info" style="float: left;margin-right:190px; ">
+                <span class="contact-info__icon" style="float: left;"><i class="ti-tablet"></i
+                ></span>
+                <div class="media-body">
+                  <h3 style="color: white;">+91-1234567890<br/>Mon to Fri 9am to 6pm</h3>
+                 
+                </div>
+              </div>
+              <div class="media contact-info">
+                <span class="contact-info__icon" ><i class="ti-email"></i></span>
+                <div class="media-body">
+                  <h3 style="color: white;">peergrade123@gmail.com<br/>Send us your query anytime!</h3>
+                  
+                </div>
+              </div>
+
+
+       
+      </div>
+      <!-- Footer Bottom -->
+      <div class="footer-bottom">
+        <div class="row d-flex align-items-center">
+          <div class="col-lg-12">
+            <div class="footer-copy-right text-center">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Footer End-->
+</footer>
+<!-- Scroll Up -->
+<div id="back-top">
+    <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+</div>
+<script src="{% static './assets/js/vendor/modernizr-3.5.0.min.js' %}"></script>
+<!-- Jquery, Popper, Bootstrap -->
+<script src="{% static './assets/js/vendor/jquery-1.12.4.min.js' %}"></script>
+<script src="{% static './assets/js/popper.min.js' %}"></script>
+<script src="{% static './assets/js/bootstrap.min.js' %}"></script>
+<!-- Jquery Mobile Menu -->
+<script src="{% static './assets/js/jquery.slicknav.min.js' %}"></script>
+
+<!-- Jquery Slick , Owl-Carousel Plugins -->
+<script src="{% static './assets/js/owl.carousel.min.js' %}"></script>
+<script src="{% static './assets/js/slick.min.js' %}"></script>
+<!-- One Page, Animated-HeadLin -->
+<script src="{% static './assets/js/wow.min.js' %}"></script>
+<script src="{% static './assets/js/animated.headline.js' %}"></script>
+<script src="{% static './assets/js/jquery.magnific-popup.js' %}"></script>
+
+<!-- Date Picker -->
+<script src="{% static './assets/js/gijgo.min.js' %}"></script>
+<!-- Nice-select, sticky -->
+<script src="{% static './assets/js/jquery.nice-select.min.js' %}"></script>
+<script src="{% static './assets/js/jquery.sticky.js' %}"></script>
+
+<!-- counter , waypoint -->
+<script src="{% static './assets/js/jquery.counterup.min.js' %}"></script>
+<script src="{% static './assets/js/waypoints.min.js' %}"></script>
+
+<!-- contact js -->
+<script src="{% static './assets/js/contact.js' %}"></script>
+<script src="{% static './assets/js/jquery.form.js' %}"></script>
+<script src="{% static './assets/js/jquery.validate.min.js' %}"></script>
+<script src="{% static './assets/js/mail-script.js' %}"></script>
+<script src="{% static './assets/js/jquery.ajaxchimp.min.js' %}"></script>
+
+<!-- Jquery Plugins, main Jquery -->
+<script src="{% static './assets/js/plugins.js' %}"></script>
+<script src="{% static './assets/js/main.js' %}"></script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,297 @@
+<!--Edited by Hussein/Nayan-->
+{% extends 'courses/nav.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Peer2Peer-Grading: {{ a.assignment_name }}</title>
+    <style>
+        .underline {
+        border-top-style: hidden;
+        border-right-style: hidden;
+        border-left-style: hidden;
+        border-bottom-style: groove;
+        background-color: #ffffff;
+        height: 45px;
+        font-family: "Lucida Console", Courier, monospace;
+        width:250px;
+        margin-bottom: 30px;
+    }
+    /*input[type="file"] {
+        display: none;
+    }*/
+
+    .feedback{
+      position: relative;
+      left: 18%;
+    }
+
+    .comments{
+      width: 60%;
+      margin-top: 5%;
+      position: relative;
+      left: 18%;
+    }
+    .comments p:nth-child(even){
+        width: 100%;
+        height: auto;
+        background: rgba(255, 255, 255, 0.6);
+        border-radius: 10px;
+        color: black;  
+    }
+
+    .comments p:nth-child(odd){
+        width: 100%;
+        height: auto;
+        background-color: rgba(17, 6, 3, 0.39);
+        border-radius: 10px;
+        color: white;
+    }
+
+    .commentform{
+      position: relative;
+        left: 5%;
+        width: 60%;
+    }
+
+
+    .custom-file-upload {
+        border-radius:10px;
+        display: inline-block;
+        padding: 6px 12px;
+        /*height: 35px;
+        width: 75px;*/
+        cursor: pointer;
+        margin-bottom: 0px;
+    }
+    /*.unstyle {
+        border-radius: 10px;
+    }
+*/    /*.btn-warning {
+        text-decoration-color: white;
+    }*/
+    /*@media only screen and (min-width: 694px) and (max-width: 1059px){
+        .unstyle {
+            margin-left: 0px;
+        }
+    }*/
+    @media only screen and (max-width: 358px){
+        .underline {
+            margin-right: 5px;
+        }
+    }
+    </style>
+</head>
+
+
+<body>
+    <hr>
+    <div class="container-fluid">
+        <div class="row-content row">
+            <div class="offset-md-2 col-sm-12 col-md-8 text-center">
+                <div class="offset-md-4 col-md-4">
+                    <h5 style="font-size: 14px;">Assignment Name:</h5>
+                </div>
+                <div class="offset-md-4 offset-sm-2 col-sm-8 col-md-4">
+                    <h1 style = "text-transform:capitalize; margin-bottom: 30px;"> {{ a.assignment_name }} </h1>
+                </div>
+                <hr style="border: 1px solid gray; width: 100%;">
+            </div>
+            <div class="col-md-2">
+                <h5>Max Marks: {{ a.points }}</h5>
+            </div>
+            <div class='feedback'>
+            {% if flag is True %}
+                <h2><a href="{% url 'view_feedback' a.pk %}">See Feedback</a></h2>
+            {% endif %}</div>
+
+        </div>
+        <div class="row-content row">
+            <div class="offset-md-2 col-md-4">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div>
+                        <label>Upload Multiple Files</label>
+                        <input class="unstyle" type="file" name="uploaded_file" multiple required><br>
+                    </div><br>
+                    <input type="hidden" name="act" value="1">
+                    <div>
+                        <input type="hidden" name="del_sub" value="-1">
+                        <button class="btn btn-success" type="submit" style="border-radius: 10px; height: 35px; padding: 20px 24px; margin-bottom: 15px;">Submit</button>
+                    </div>
+                </form>
+                {% if a.grading_type is False %}
+                <h4>Marks obtained by teacher: {{ teacher_marks }}/{{ tt_marks }}</h4>
+                <h4>Marks obtained by peer: {{ marks }}/{{ ts_marks }}
+                {% if total_marks %}
+                <h4>Total Marks: {{ total_marks }}/{{ t_points }}</h4>
+                {% endif %}
+                {% else %}
+                <h4>Marks obtained: {{ sub.marks }}/{{ a.points }}</h4>
+                {% endif %}
+            </div>
+            <div class="col-sm-12 col-md-4">
+                {% for file in files %}
+                <h5>Download here: <a href="{{ file.sub.url }}">{{ file.sub.url }}</a></h5>
+                {% endfor %}
+            </div>
+            <div class='comments'>
+            {% if sub %}
+            <form method="post" action="{% url 'cur_assignment_join' a.pk %}" class='commentform'>
+            {% csrf_token %}
+            <input type="text" name="comment" autocomplete="off" size="60">
+            <input type="hidden" name="act" value="2">
+                <input type="hidden" name="del_sub" value="0">
+            <button type="submit">Post</button>
+            </form>
+            <h2>Comments</h2>
+            {% for comment in comments %}
+            <p>{{ comment.comment_user.username }} : <br>{{comment.text}}<br>
+              {{comment.comment_date}}</p>
+            {% endfor %}
+            {% endif %}
+          </div>
+        </div>
+    </div>
+</body>
+<footer style="margin-top: 50px;">
+    <!--------------------------------COPY START  ---------------------------------->
+
+    <!--? Footer Start-->
+
+    <div class="footer-area footer-bg">
+    <div class="container">
+      <div class="footer-top footer-padding">
+        <!-- footer Heading -->
+        <div class="footer-heading">
+          <div class="row justify-content-between">
+            <div class="col-xl-6 col-lg-7 col-md-10">
+              <div class="footer-tittle2">
+                <h4>Stay Updated</h4>
+              </div>
+              <!-- Form -->
+              <div class="footer-form mb-50">
+                <div id="mc_embed_signup">
+                  <form target="_blank"
+                    action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
+                    method="get" class="subscribe_form relative mail_part" novalidate="true">
+                    <input type="email" name="EMAIL" id="newsletter-form-email" placeholder=" Email Address "
+                      class="placeholder hide-on-focus" onfocus="this.placeholder = ''"
+                      onblur="this.placeholder = 'Your email address'" />
+                    <div class="form-icon">
+                      <button type="submit" name="submit" id="newsletter-submit"
+                        class="email_icon newsletter-submit button-contactForm">
+                        Subscribe Now
+                      </button>
+                    </div>
+                    <div class="mt-10 info"></div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-5 col-lg-5">
+              <div class="footer-tittle2">
+                <h4>Let’s Get Social</h4>
+              </div>
+              <!-- Footer Social -->
+              <div class="footer-social">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-google"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Footer Menu -->
+   
+              <div class="media contact-info" style="float: left;margin-right: 120px;">
+                <span class="contact-info__icon" style="float: left;"><i class="ti-home"></i></span>
+                <div class="media-body ">
+                  <h3 style="color: white;">K. J. Somaiya College of Engineering<br/><span style="margin-left: 45px;">Mumbai, 400077<span></h3>
+              
+                </div>
+              </div>
+              <div class="media contact-info" style="float: left;margin-right:190px; ">
+                <span class="contact-info__icon" style="float: left;"><i class="ti-tablet"></i
+                ></span>
+                <div class="media-body">
+                  <h3 style="color: white;">+91-1234567890<br/>Mon to Fri 9am to 6pm</h3>
+                 
+                </div>
+              </div>
+              <div class="media contact-info">
+                <span class="contact-info__icon" ><i class="ti-email"></i></span>
+                <div class="media-body">
+                  <h3 style="color: white;">peergrade123@gmail.com<br/>Send us your query anytime!</h3>
+                  
+                </div>
+              </div>
+
+
+       
+      </div>
+      <!-- Footer Bottom -->
+      <div class="footer-bottom">
+        <div class="row d-flex align-items-center">
+          <div class="col-lg-12">
+            <div class="footer-copy-right text-center">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Footer End-->
+</footer>
+<!-- Scroll Up -->
+<div id="back-top">
+    <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+</div>
+
+<!-- JS here -->
+
+<script src="{% static './assets/js/vendor/modernizr-3.5.0.min.js' %}"></script>
+<!-- Jquery, Popper, Bootstrap -->
+<script src="{% static './assets/js/vendor/jquery-1.12.4.min.js' %}"></script>
+<script src="{% static './assets/js/popper.min.js' %}"></script>
+<script src="{% static './assets/js/bootstrap.min.js' %}"></script>
+<!-- Jquery Mobile Menu -->
+<script src="{% static './assets/js/jquery.slicknav.min.js' %}"></script>
+
+<!-- Jquery Slick , Owl-Carousel Plugins -->
+<script src="{% static './assets/js/owl.carousel.min.js' %}"></script>
+<script src="{% static './assets/js/slick.min.js' %}"></script>
+<!-- One Page, Animated-HeadLin -->
+<script src="{% static './assets/js/wow.min.js' %}"></script>
+<script src="{% static './assets/js/animated.headline.js' %}"></script>
+<script src="{% static './assets/js/jquery.magnific-popup.js' %}"></script>
+
+<!-- Date Picker -->
+<script src="{% static './assets/js/gijgo.min.js' %}"></script>
+<!-- Nice-select, sticky -->
+<script src="{% static './assets/js/jquery.nice-select.min.js' %}"></script>
+<script src="{% static './assets/js/jquery.sticky.js' %}"></script>
+
+<!-- counter , waypoint -->
+<script src="{% static './assets/js/jquery.counterup.min.js' %}"></script>
+<script src="{% static './assets/js/waypoints.min.js' %}"></script>
+
+<!-- contact js -->
+<script src="{% static './assets/js/contact.js' %}"></script>
+<script src="{% static './assets/js/jquery.form.js' %}"></script>
+<script src="{% static './assets/js/jquery.validate.min.js' %}"></script>
+<script src="{% static './assets/js/mail-script.js' %}"></script>
+<script src="{% static './assets/js/jquery.ajaxchimp.min.js' %}"></script>
+
+<!-- Jquery Plugins, main Jquery -->
+<script src="{% static './assets/js/plugins.js' %}"></script>
+<script src="{% static './assets/js/main.js' %}"></script>
+
+</html>
+{% endblock %}

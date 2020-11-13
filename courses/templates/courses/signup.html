@@ -1,0 +1,327 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>PeerGraderView</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="{% static 'assets/img/som_icon.png' %}"
+    />
+
+
+
+
+    <!-- CSS here -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css'%}" />
+    <link
+      rel="stylesheet"
+      href="{% static 'assets/css/owl.carousel.min.css'%}"
+    />
+    <link rel="stylesheet" href="{% static 'assets/css/slicknav.css'%}" />
+    <link rel="stylesheet" href="{% static 'assets/css/flaticon.css'%}" />
+    <link rel="stylesheet" href="{% static 'assets/css/gijgo.css'%}" />
+    <link rel="stylesheet" href="{% static 'assets/css/animate.min.css'%}" />
+    <link rel="stylesheet" href="{% static 'assets/css/magnific-popup.css'%}" />
+    <link
+      rel="stylesheet"
+      href="{% static 'assets/css/fontawesome-all.min.css'%}"
+    />
+    <link rel="stylesheet" href="{% static 'assets/css/themify-icons.css'%}" />
+    <link rel="stylesheet" href="{% static 'assets/css/slick.css'%}" />
+    <link rel="stylesheet" href="{% static 'assets/css/nice-select.css'%}" />
+    <link rel="stylesheet" href="{% static 'assets/css/style.css'%}" />
+    <link rel="stylesheet" href="{% static 'login/login_css.css'%}" />
+
+
+  </head>
+  <body>
+    <!--? Preloader Start -->
+    <div id="preloader-active">
+      <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="preloader-inner position-relative">
+          <div class="preloader-circle"></div>
+          <div class="preloader-img pere-text">
+            <img src="{% static 'assets/img/logo/loder.png' %}" alt="" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Preloader Start -->
+    <header>
+      <!-- Header Start -->
+      <div class="header-area">
+        <div class="main-header">
+          <div class="header-top d-none d-lg-block">
+
+            <div class="container">
+              <div class="col-xl-12">
+                <div
+                  class="row d-flex justify-content-between align-items-center"
+                >
+                  <div class="header-info-left">
+                    <ul>
+                      {% if user.is_authenticated %}
+                       <li>{{user.username}}</li>
+                      <li>{{user.email}}</li>
+                      {% else %}
+                      <li>Login to explore</li>
+                      {% endif %}
+                    </ul>
+                  </div>
+                  <div class="header-info-right">
+                    <ul>
+                      {% if user.is_authenticated %}
+                      <a style="color:blue;" href="{% url 'logout' %}"><i class="ti-user"></i>Logout</a>
+                      {% else %}
+                      <li>
+                        <a href="{% url 'login' %}"><i class="ti-user"></i>Login</a>
+                      </li>
+                      <li>
+                        <a href="{% url 'signup' %}"><i class="ti-lock"></i>Register</a>
+                      </li>
+                      {% endif %}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="header-bottom header-sticky">
+
+            <div class="container">
+              <div class="menu-wrapper">
+                <!-- Logo -->
+                <div class="logo logo2">
+                  <a href="{% url 'index' %}"
+                    ><img
+                      src="{% static 'assets/img/logo/somaiya.png' %}"
+                      alt="Somaiya Vidyavihar University"
+                      width="180"
+                      heigth="60"
+                  /></a>
+                </div>
+                <!-- @@@@####$$$$%%%%^^^^&&&&****(((())))-->
+                <!-- Main-menu -->
+                <div class="main-menu d-none d-lg-block">
+                  <nav>
+                    <ul id="navigation">
+                      <li><a href="{% url 'index' %}">Home</a></li>
+                      <li><a href="{% url 'about' %}">About</a></li>
+                      {% if user.is_authenticated %}
+                        <li><a href="{% url 'homepage' %}">Created Classes</a></li>
+                        <li><a href="{% url 'joinclass' %}">Joined Classes</a></li>
+                      {% endif %}
+                      <li><a href="{% url 'contact' %}">Contact</a></li>
+                    </ul>
+                  </nav>
+                </div>
+
+              </div>
+              <!-- Mobile Menu -->
+              <div class="col-12">
+                <div class="mobile_menu d-block d-lg-none"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Header End -->
+    </header>
+
+<!-- ----------------  --------------------- ------------------ -------->
+
+<main>
+  
+<div class="container1" id="container1 center-login1">
+	<div class="form-container1 sign-in-container1">
+		<form method="POST">
+      {% csrf_token %}
+      {{forms|crispy}}
+
+            <button type="submit" class="pure-button pure-button-primary">Sign Up</button>
+       
+          
+       
+
+			<!-- <a href="#">Forgot your password?</a> -->
+			
+		</form>
+	</div>
+	<div class="overlay-container1">
+		<div class="overlay1">
+			<div class="overlay-panel1 overlay-left1">
+				<h1>Welcome Back!</h1>
+				<p>To keep connected with us please login with your personal info</p>
+				<button class="ghost1" id="signIn">Sign In</button>
+			</div> 
+			<div class="overlay-panel1 overlay-right1">
+				<h1>Hello, Friend!</h1>
+				<p>Enter your personal details and start journey with us</p>
+			<a href="{% url 'login' %}">	<button class="ghost1" id="signUp">Already a member? Log In</button></a>
+			</div>
+		</div>
+	</div>
+</div>
+<br><br><br>
+</main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--------------- - ---------------------- -------------------------------------------->
+    <!--? Footer Start-->
+    
+     <div class="footer-area footer-bg">
+    <div class="container">
+      <div class="footer-top footer-padding">
+        <!-- footer Heading -->
+        <div class="footer-heading">
+          <div class="row justify-content-between">
+            <div class="col-xl-6 col-lg-7 col-md-10">
+              <div class="footer-tittle2">
+                <h4>Stay Updated</h4>
+              </div>
+              <!-- Form -->
+              <div class="footer-form mb-50">
+                <div id="mc_embed_signup">
+                  <form target="_blank"
+                    action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
+                    method="get" class="subscribe_form relative mail_part" novalidate="true">
+                    <input type="email" name="EMAIL" id="newsletter-form-email" placeholder=" Email Address "
+                      class="placeholder hide-on-focus" onfocus="this.placeholder = ''"
+                      onblur="this.placeholder = 'Your email address'" />
+                    <div class="form-icon">
+                      <button type="submit" name="submit" id="newsletter-submit"
+                        class="email_icon newsletter-submit button-contactForm">
+                        Subscribe Now
+                      </button>
+                    </div>
+                    <div class="mt-10 info"></div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-5 col-lg-5">
+              <div class="footer-tittle2">
+                <h4>Let’s Get Social</h4>
+              </div>
+              <!-- Footer Social -->
+              <div class="footer-social">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-google"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Footer Menu -->
+   
+              <div class="media contact-info" style="float: left;margin-right: 120px;">
+                <span class="contact-info__icon" style="float: left;"><i class="ti-home"></i></span>
+                <div class="media-body ">
+                  <h3 style="color: white;">K. J. Somaiya College of Engineering<br/><span style="margin-left: 45px;">Mumbai, 400077<span></h3>
+              
+                </div>
+              </div>
+              <div class="media contact-info" style="float: left;margin-right:190px; ">
+                <span class="contact-info__icon" style="float: left;"><i class="ti-tablet"></i
+                ></span>
+                <div class="media-body">
+                  <h3 style="color: white;">+91-1234567890<br/>Mon to Fri 9am to 6pm</h3>
+                 
+                </div>
+              </div>
+              <div class="media contact-info" style="float: left;">
+                <span class="contact-info__icon" ><i class="ti-email"></i></span>
+                <div class="media-body">
+                  <h3 style="color: white;">peergrade123@gmail.com<br/>Send us your query anytime!</h3>
+                  
+                </div>
+              </div>
+
+
+       
+      </div>
+      <!-- Footer Bottom -->
+      <div class="footer-bottom">
+        <div class="row d-flex align-items-center">
+          <div class="col-lg-12">
+            <div class="footer-copy-right text-center">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Footer End-->
+</footer>
+    <!-- Scroll Up -->
+    <div id="back-top">
+      <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+    </div>
+
+    <!-- JS here -->
+
+    <script src="{% static './assets/js/vendor/modernizr-3.5.0.min.js' %}"></script>
+    <!-- Jquery, Popper, Bootstrap -->
+    <script src="{% static './assets/js/vendor/jquery-1.12.4.min.js' %}"></script>
+    <script src="{% static './assets/js/popper.min.js' %}"></script>
+    <script src="{% static './assets/js/bootstrap.min.js' %}"></script>
+    <!-- Jquery Mobile Menu -->
+    <script src="{% static './assets/js/jquery.slicknav.min.js' %}"></script>
+
+    <!-- Jquery Slick , Owl-Carousel Plugins -->
+    <script src="{% static './assets/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static './assets/js/slick.min.js' %}"></script>
+    <!-- One Page, Animated-HeadLin -->
+    <script src="{% static './assets/js/wow.min.js' %}"></script>
+    <script src="{% static './assets/js/animated.headline.js' %}"></script>
+    <script src="{% static './assets/js/jquery.magnific-popup.js' %}"></script>
+
+    <!-- Date Picker -->
+    <script src="{% static './assets/js/gijgo.min.js' %}"></script>
+    <!-- Nice-select, sticky -->
+    <script src="{% static './assets/js/jquery.nice-select.min.js' %}"></script>
+    <script src="{% static './assets/js/jquery.sticky.js' %}"></script>
+
+    <!-- counter , waypoint -->
+    <script src="{% static './assets/js/jquery.counterup.min.js' %}"></script>
+    <script src="{% static './assets/js/waypoints.min.js' %}"></script>
+
+    <!-- contact js -->
+    <script src="{% static './assets/js/contact.js' %}"></script>
+    <script src="{% static './assets/js/jquery.form.js' %}"></script>
+    <script src="{% static './assets/js/jquery.validate.min.js' %}"></script>
+    <script src="{% static './assets/js/mail-script.js' %}"></script>
+    <script src="{% static './assets/js/jquery.ajaxchimp.min.js' %}"></script>
+
+    <!-- Jquery Plugins, main Jquery -->
+    <script src="{% static './assets/js/plugins.js' %}"></script>
+    <script src="{% static './assets/js/main.js' %}"></script>
+
+
+    <!--Script for confirm password-->
+   <script src= "{% static './signup/signup.js' %}"> 
+</script>
+  </body>
+</html>
+

@@ -1,0 +1,24 @@
+Required:
+
+Important
+
+Work Experience (Description if available)
+Certifications (Knowledge gained if available)
+Projects (Job Title, project description if available)
+Research (Research description if available)
+Internships (Job Title, description if available)
+Education (Marks, CGPA)
+Skills/Qualities 
+Relevant CourseWork
+Volunteer Work 
+Important Keywords
+
+
+Not Important
+
+Personal Info like hobbies, address
+Headings like Summary, WorkExperience, Skills etc
+Images, graphs
+tables, text boxes
+special characters, fonts, font color
+Contact info

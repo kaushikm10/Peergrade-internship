@@ -1,6 +1,6 @@
 # Peergrade-internship
 
-A tool to be used by teachers to assess students and assign students to grade their peers. This is created using <a href = "https://docs.djangoproject.com/en/3.1/"> ***[Django]***</a>, HTML, CSS, JS and <a href = "https://www.postgresql.org/"> ***[PostGres]***</a> for handling classes in the backend. 
+A tool to be used by teachers to assess students and assign students to grade their peers. This is created using <a href = "https://docs.djangoproject.com/en/3.1/"> ***Django***</a>, HTML, CSS, JS and <a href = "https://www.postgresql.org/"> ***PostGreSQL***</a> for handling classes in the backend. 
 
 The ***functionalities*** provided in the project are:
 * Student and Teacher Registration/ Login

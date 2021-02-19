@@ -4,10 +4,14 @@ A tool to be used by teachers to assess students and assign students to grade th
 
 The ***functionalities*** provided in the project are:
 * Student and Teacher Registration/ Login
+<img src = "Snapshots/Capture.PNG" >
 * Muliple teachers in a class
 * Creating and Joining Classes using _class code_
+<img src = "Snapshots/teacher.PNG" ><br>
+<img src = "Snapshots/student1.PNG" >
 * Adding students without using _class code_
 * Creating assignments, notices for teachers
+<img src = "Snapshots/teacher3.PNG" >
 * Submitting assignments for students
 * Alotting peers to review assginments
 * Review by the teacher itself

@@ -1,0 +1,11 @@
+Django==3.1.1
+django-crispy-forms==1.10.0
+WTForms==2.3.3
+django-allauth==0.42.0
+django-ckeditor==6.0.0
+django-js-asset==1.2.2
+google-auth==1.22.1
+google-auth-oauthlib==0.4.1
+google-pasta==0.2.0
+Jinja2==2.11.2
+psycopg2==2.8.6

@@ -83,8 +83,8 @@ WSGI_APPLICATION = 'peergrade.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': "peergrade-system",
-        'USER': "postgres1",
+        'NAME': "ppergradeview-system",
+        'USER': "postgres",
         'PASSWORD': "0000",
         'HOST': "localhost",
         'PORT': "5432"

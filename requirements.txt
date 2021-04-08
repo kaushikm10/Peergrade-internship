@@ -1,4 +1,4 @@
-Django==3.1.1
+Django==3.2.0
 django-crispy-forms==1.10.0
 WTForms==2.3.3
 django-allauth==0.42.0
@@ -9,3 +9,5 @@ google-auth-oauthlib==0.4.1
 google-pasta==0.2.0
 Jinja2==2.11.2
 psycopg2==2.8.6
+gunicorn==20.1.0
+future==0.18.2

@@ -25,7 +25,7 @@ SECRET_KEY = 't3c=^mcb1ws_2c0_xt1^h^6ui(zwd888l9c8^p0y9(8w1s$v14'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', 'https://peergradeview.herokuapp.com']
+ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', 'peergradeview.herokuapp.com']
 
 
 # Application definition
@@ -83,13 +83,15 @@ WSGI_APPLICATION = 'peergrade.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': "ppergradeview-system",
-        'USER': "postgres",
-        'PASSWORD': "0000",
-        'HOST': "localhost",
-        'PORT': "5432"
+        'HOST': "ec2-54-155-87-214.eu-west-1.compute.amazonaws.com",
+        'USER': "psnoqfazlloxbh",
+        'PASSWORD': "287e6b598ce13fa39852e5d589941f4f857fbb004e142affc82c44c6f3e88f1a",
+        'NAME': "d5qdkfnf0v3jg7",
+        'PORT': 5432
     }
 }
+
+
 AUTHENTICATION_BACKENDS = [
 
     # Needed to login by username in Django admin, regardless of `allauth`

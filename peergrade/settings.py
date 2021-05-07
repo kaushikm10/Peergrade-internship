@@ -83,10 +83,10 @@ WSGI_APPLICATION = 'peergrade.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'HOST': "ec2-54-155-87-214.eu-west-1.compute.amazonaws.com",
-        'USER': "psnoqfazlloxbh",
-        'PASSWORD': "287e6b598ce13fa39852e5d589941f4f857fbb004e142affc82c44c6f3e88f1a",
-        'NAME': "d5qdkfnf0v3jg7",
+        'HOST': "ec2-54-216-17-9.eu-west-1.compute.amazonaws.com",
+        'USER': "pwohsvfnjcqrgw",
+        'PASSWORD': "b6ab4e8bf699ff04479635508806f6838dcc8dce72fc2f266e5bf17f21a7c74a",
+        'NAME': "d45v6kj5rmh9n",
         'PORT': 5432
     }
 }
